@@ -7,6 +7,5 @@
 
 **How to use the project**
 - Basically users can view the optimal layout of the project depending on their device's screen.
-- To see the hover states for interactive elements by moving the mouse over the interactive elements.
+- To see the hover states for interactive elements, simply move the mouse over the interactive elements.
 
-![Alt text](/relative/path/to/img.jpg?raw=true "Optional Title")
