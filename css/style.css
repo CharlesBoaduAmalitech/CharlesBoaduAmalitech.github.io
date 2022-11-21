@@ -61,7 +61,7 @@
     content: "";
     width: 381.4px;
     height: 520px;
-    background-image: url("../images/bg-main-mobile.png");
+    background-image: url("../assets/bg-main-mobile.png");
     background-size: cover;
     background-position: 20% 60%;
     position: absolute;
@@ -71,7 +71,7 @@
   }
   @media only screen and (min-width: 750px) {
     .container::after {
-      background-image: url("../images/bg-main-tablet.png");
+      background-image: url("../assets/bg-main-tablet.png");
       background-repeat: none;
       background-position: 80% 60%;
       right: -30px;
@@ -87,7 +87,7 @@
       top: -144px;
       background-position: 135% 60%;
       height: 1758px;
-      background-image: url("../images/bg-main-desktop.png");
+      background-image: url("../assets/bg-main-desktop.png");
     }
   }
   
