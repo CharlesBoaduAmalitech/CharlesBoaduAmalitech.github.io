@@ -6,6 +6,9 @@
 - Simply click on the link: https://charlesboaduamalitech.github.io to view the equalizer landing page project.
 
 **How to use the project**
-- Basically users can view the optimal layout of the project depending on their device's screen.
-- To see the hover states for interactive elements, simply move the mouse over the interactive elements.
+- Basically users can view the optimal layout of the project depending on their device's screen as they click on the link pasted above.
+- To see the hover states for interactive elements, simply move the mouse over the interactive elements such as the social media handles etc.
+
+**Screenshot of finished project**
+- ![Capture](https://user-images.githubusercontent.com/116555014/203048735-2f08f06a-3df0-480f-8bc4-67829bb1d7be.PNG)
 
