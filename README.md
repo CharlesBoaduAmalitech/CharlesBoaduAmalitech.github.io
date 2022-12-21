@@ -40,6 +40,7 @@ Your users should be able to:
 ![screenshot](https://user-images.githubusercontent.com/116555014/208779547-4ef3c2d6-b567-4061-ba90-f4c993901d76.png)
 
 ### Deployed Link
+Click on this link to open Tic Tac Toe Game: https://charlesboaduamalitech.github.io/
 
 ### To run this project
 - Simply click on the deployed link above to play the Tic Tac Toe Game in your Web browser.
