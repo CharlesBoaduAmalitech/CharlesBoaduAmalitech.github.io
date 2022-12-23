@@ -1,10 +1,10 @@
 const gameBoard = document.getElementById("gameBoard");
 const gameMenu = document.getElementById("gameMenu");
-var X_pattern = [];
-var O_pattern = [];
+let X_pattern = [];
+let O_pattern = [];
 const winnerMark = document.getElementById("winner-mark");
-var turn = document.getElementById("turn");
-var allBox = document.getElementsByClassName("box");
+let turn = document.getElementById("turn");
+let allBox = document.getElementsByClassName("box");
 const player1Name = document.getElementById("player1Name");
 const player2Name = document.getElementById("player2Name");
 const cpuBtn = document.getElementById("cpuBtn");
@@ -12,8 +12,8 @@ const playerBtn = document.getElementById("playerBtn");
 const XradioBtn = document.getElementById("X-mark");
 const OradioBtn = document.getElementById("O-mark");
 const cpuThinkMessage = document.getElementById("cpuThink");
-const winnerX = false;
-const winnerO = false;
+let winnerX = false;
+let winnerO = false;
 const box0 = document.getElementById("0");
 const box1 = document.getElementById("1");
 const box2 = document.getElementById("2");
@@ -24,9 +24,9 @@ const box6 = document.getElementById("6");
 const box7 = document.getElementById("7");
 const box8 = document.getElementById("8");
 
-var origBoard = Array.from(Array(9).keys());
-var huPlayer;
-var aiPlayer;
+let origBoard = Array.from(Array(9).keys());
+let huPlayer;
+let aiPlayer;
 
 const win_pattern = [
   [0, 1, 2],
@@ -73,8 +73,8 @@ function restartGame() {
 }
 
 function hitBox(box) {
-  var boxChoice = document.getElementById(box);
-  var img = document.createElement("img");
+  let boxChoice = document.getElementById(box);
+  let img = document.createElement("img");
 
   if (turn.getAttribute("data-value") === "X") {
     img.src = "./assets/icon-x.svg";
@@ -201,8 +201,7 @@ async function cpuTurn() {
       }
     });
     await promise;
-
-    setTimeout(cpuPlay, 3000);
+    setTimeout(cpuPlay, 2000);
     cpuThink();
   }
 
@@ -225,7 +224,7 @@ async function cpuTurn() {
       }
     });
     await promise;
-    setTimeout(cpuPlay, 2500);
+    setTimeout(cpuPlay, 2000);
     cpuThink();
   }
 }
@@ -281,32 +280,47 @@ const drawScore = document.getElementById("draw");
 const Oscore = document.getElementById("Oscore");
 
 function results() {
-  modal.style.display = "initial";
-  endGame.style.display = "flex";
-  restartingGame.style.display = "none";
+  console.log(X_pattern);
+  console.log(O_pattern);
+  setTimeout(function () {
+    modal.style.display = "initial";
+    endGame.style.display = "flex";
+    restartingGame.style.display = "none";
+  }, 2000);
+  
 
   if (turn.getAttribute("data-value") === "O") {
     winnerName.style.display = "initial";
 
     if (playerBtn.getAttribute("data-value") === "active") {
       if (XradioBtn.checked === true) {
+        changeXBackground();
+        console.log('Here I am 1')
         winnerName.innerHTML = "Player 1 wins!";
       }
       if (OradioBtn.checked === true) {
+        changeXBackground();
+        console.log('Here I am 2');
         winnerName.innerHTML = "Player 1 wins!";
       }
     }
     if (cpuBtn.getAttribute("data-value") === "active") {
       if (XradioBtn.checked === true) {
+        changeOBackground();
         winnerName.innerHTML = "You won!";
       }
       if (OradioBtn.checked === true) {
+        changeXBackground();
+        console.log(O_pattern);
+        console.log('1');
         winnerName.innerHTML = "Oh no, you lost...";
       }
     }
 
     winnerMark.src = "./assets/icon-x.svg";
     winnerMark.style.display = "initial";
+    winnerMark.style.width = "50px";
+    winnerMark.style.height = "50px";
     winnerTakes.style = "color: hsl( var(--clr-lightBlue) );";
     winnerTakes.innerHTML = "takes the round";
     Xscore.innerHTML++;
@@ -315,22 +329,31 @@ function results() {
     winnerName.style.display = "initial";
     if (playerBtn.getAttribute("data-value") === "active") {
       if (OradioBtn.checked === true) {
+        changeOBackground();
+        console.log('Here I am 3')
         winnerName.innerHTML = "Player 2 wins!";
       }
       if (XradioBtn.checked === true) {
+        changeOBackground();
+        console.log('Here I am 4');
         winnerName.innerHTML = "Player 2 wins!";
       }
     }
     if (cpuBtn.getAttribute("data-value") === "active") {
       if (OradioBtn.checked === true) {
+        changeOBackground();
         winnerName.innerHTML = "You won!";
       }
       if (XradioBtn.checked === true) {
+        changeOBackground();
         winnerName.innerHTML = "Oh no, you lost...";
       }
     }
+
     winnerMark.src = "./assets/icon-o.svg";
     winnerMark.style.display = "initial";
+    winnerMark.style.width = "50px";
+    winnerMark.style.height = "50px";
     winnerTakes.style = "color: hsl( var(--clr-orange) );";
     winnerTakes.innerHTML = "takes the round";
     Oscore.innerHTML++;
@@ -338,19 +361,25 @@ function results() {
   }
 }
 
+
+
 function draw() {
-  modal.style.display = "initial";
-  endGame.style.display = "flex";
-  restartingGame.style.display = "none";
-  winnerMark.style.display = "none";
-  winnerTakes.innerHTML = "round tied";
-  winnerTakes.style = "color: hsl( var(--clr-silver) );";
-  winnerName.style.display = "none";
-  drawScore.innerHTML++;
+  setTimeout(function(){
+    modal.style.display = "initial";
+    endGame.style.display = "flex";
+    restartingGame.style.display = "none";
+    winnerMark.style.display = "none";
+    winnerTakes.innerHTML = "round tied";
+    winnerTakes.style = "color: hsl( var(--clr-silver) );";
+    winnerName.style.display = "none";
+    drawScore.innerHTML++;
+  }, 1500);
 }
 
 function nextRound() {
-  var boxPlayed = document.querySelectorAll(".boxPlayed");
+  let boxPlayed = document.querySelectorAll(".boxPlayed");
+  removeXBackgroundColor();
+  removeOBackgroundColor();
 
   modal.style.display = "none";
   endGame.style.display = "none";
@@ -459,4 +488,240 @@ function minimax(newBoard, player) {
   }
 
   return moves[bestMove];
+}
+
+function changeXBackground() {
+  if (String(X_pattern) === '0,1,2') {
+    box0.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    box1.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    box2.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    let img = document.getElementsByClassName('boxPlayed');
+    img[0].src = './assets/icon-x-1.png';
+    img[1].src = './assets/icon-x-1.png';
+    img[2].src = './assets/icon-x-1.png';
+  } else if (String(X_pattern) === '3,4,5') {
+    box4.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    box3.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    box5.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    img = document.getElementsByClassName('boxPlayed');
+    img[0].src = './assets/icon-x-1.png';
+    img[1].src = './assets/icon-x-1.png';
+    img[2].src = './assets/icon-x-1.png';
+  } else if (String(X_pattern) === '6,7,8') {
+    box6.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    box7.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    box8.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    img = document.getElementsByClassName('boxPlayed');
+    img[2].src = './assets/icon-x-1.png';
+    img[3].src = './assets/icon-x-1.png';
+    img[4].src = './assets/icon-x-1.png';
+  } else if (String(X_pattern) === '0,3,6') {
+    box0.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    box3.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    box6.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    img = document.getElementsByClassName('boxPlayed');
+    img[0].src = './assets/icon-x-1.png';
+    img[2].src = './assets/icon-x-1.png';
+    img[4].src = './assets/icon-x-1.png';
+  } else if (String(X_pattern) === '1,4,7') {
+    box1.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    box4.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    box7.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    img = document.getElementsByClassName('boxPlayed');
+    img[0].src = './assets/icon-x-1.png';
+    img[2].src = './assets/icon-x-1.png';
+    img[4].src = './assets/icon-x-1.png';
+  } else if (String(X_pattern) === '2,5,8') {
+    box2.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    box5.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    box8.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    img = document.getElementsByClassName('boxPlayed');
+    img[0].src = './assets/icon-x-1.png';
+    img[2].src = './assets/icon-x-1.png';
+    img[4].src = './assets/icon-x-1.png';
+  } else if (String(X_pattern) === '0,4,8') {
+    box0.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    box4.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    box8.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    img = document.getElementsByClassName('boxPlayed');
+    console.log(img);
+    img[0].src = './assets/icon-x-1.png';
+    img[2].src = './assets/icon-x-1.png';
+    img[4].src = './assets/icon-x-1.png';
+  } else if (String(X_pattern) === '2,4,6') {
+    box2.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    box4.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    box6.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    img = document.getElementsByClassName('boxPlayed');
+    img[1].src = './assets/icon-x-1.png';
+    img[3].src = './assets/icon-x-1.png';
+    img[4].src = './assets/icon-x-1.png';
+  } else if (String(X_pattern) === '1,4,6,7') {
+    box1.style.backgroundColor = '#F2B137';
+    box4.style.backgroundColor = '#F2B137';
+    box7.style.backgroundColor = '#F2B137';
+    let img = document.getElementsByClassName('boxPlayed');
+    img[0].src = './assets/icon-o-1.png';
+    img[1].src = './assets/icon-o-1.png';
+    img[5].src = './assets/icon-o-1.png';
+  }
+}
+
+function changeOBackground() {
+  if (String(O_pattern) === '0,1,2') {
+    box0.style.backgroundColor = '#F2B137';
+    box1.style.backgroundColor = '#F2B137';
+    box2.style.backgroundColor = '#F2B137';
+    let img = document.getElementsByClassName('boxPlayed');
+    img[0].src = './assets/icon-o-1.png';
+    img[1].src = './assets/icon-o-1.png';
+    img[2].src = './assets/icon-o-1.png';
+  } else if (String(O_pattern) === '3,4,5') {
+    box3.style.backgroundColor = '#F2B137';
+    box4.style.backgroundColor = '#F2B137';
+    box5.style.backgroundColor = '#F2B137';
+    let img = document.getElementsByClassName('boxPlayed');
+    img[2].src = './assets/icon-o-1.png';
+    img[3].src = './assets/icon-o-1.png';
+    img[4].src = './assets/icon-o-1.png';
+  } else if (String(O_pattern) === '6,7,8') {
+    box6.style.backgroundColor = '#F2B137';
+    box7.style.backgroundColor = '#F2B137';
+    box8.style.backgroundColor = '#F2B137';
+    let img = document.getElementsByClassName('boxPlayed');
+    img[3].src = './assets/icon-o-1.png';
+    img[4].src = './assets/icon-o-1.png';
+    img[5].src = './assets/icon-o-1.png';
+  } else if (String(O_pattern) === '0,3,6') {
+    box0.style.backgroundColor = '#F2B137';
+    box3.style.backgroundColor = '#F2B137';
+    box6.style.backgroundColor = '#F2B137';
+    let img = document.getElementsByClassName('boxPlayed');
+    img[0].src = './assets/icon-o-1.png';
+    img[1].src = './assets/icon-o-1.png';
+    img[5].src = './assets/icon-o-1.png';
+  } else if (String(O_pattern) === '1,4,7') {
+    box1.style.backgroundColor = '#F2B137';
+    box4.style.backgroundColor = '#F2B137';
+    box7.style.backgroundColor = '#F2B137';
+    let img = document.getElementsByClassName('boxPlayed');
+    img[1].src = './assets/icon-o-1.png';
+    img[3].src = './assets/icon-o-1.png';
+    img[5].src = './assets/icon-o-1.png';
+  } else if (String(O_pattern) === '2,5,8') {
+    box2.style.backgroundColor = '#F2B137';
+    box5.style.backgroundColor = '#F2B137';
+    box8.style.backgroundColor = '#F2B137';
+    let img = document.getElementsByClassName('boxPlayed');
+    console.log(img);
+    img[1].src = './assets/icon-o-1.png';
+    img[4].src = './assets/icon-o-1.png';
+    img[5].src = './assets/icon-o-1.png';
+  } else if (String(O_pattern) === '0,4,8') {
+    box0.style.backgroundColor = '#F2B137';
+    box4.style.backgroundColor = '#F2B137';
+    box8.style.backgroundColor = '#F2B137';
+    let img = document.getElementsByClassName('boxPlayed');
+    img[0].src = './assets/icon-o-1.png';
+    img[3].src = './assets/icon-o-1.png';
+    img[5].src = './assets/icon-o-1.png';
+  } else if (String(O_pattern) === '2,4,6') {
+    box2.style.backgroundColor = '#F2B137';
+    box4.style.backgroundColor = '#F2B137';
+    box6.style.backgroundColor = '#F2B137';
+    let img = document.getElementsByClassName('boxPlayed');
+    console.log(img);
+    img[2].src = './assets/icon-o-1.png';
+    img[4].src = './assets/icon-o-1.png';
+    img[5].src = './assets/icon-o-1.png';
+} else if (String(O_pattern) === '1,4,6,7') {
+    box1.style.backgroundColor = '#F2B137';
+    box4.style.backgroundColor = '#F2B137';
+    box7.style.backgroundColor = '#F2B137';
+    let img = document.getElementsByClassName('boxPlayed');
+    img[1].src = './assets/icon-o-1.png';
+    img[4].src = './assets/icon-o-1.png';
+    img[7].src = './assets/icon-o-1.png';
+}
+}
+
+function removeXBackgroundColor() {
+  if (String(X_pattern) === '0,1,2') {
+    document.getElementById('0').style.removeProperty('background-color');
+    document.getElementById('1').style.removeProperty('background-color');
+    document.getElementById('2').style.removeProperty('background-color');
+  } else if (String(X_pattern) === '3,4,5') {
+    document.getElementById('3').style.removeProperty('background-color');
+    document.getElementById('4').style.removeProperty('background-color');
+    document.getElementById('5').style.removeProperty('background-color');
+  } else if (String(X_pattern) === '6,7,8') {
+    document.getElementById('6').style.removeProperty('background-color');
+    document.getElementById('7').style.removeProperty('background-color');
+    document.getElementById('8').style.removeProperty('background-color');
+  } else if (String(X_pattern) === '0,3,6') {
+    document.getElementById('0').style.removeProperty('background-color');
+    document.getElementById('3').style.removeProperty('background-color');
+    document.getElementById('6').style.removeProperty('background-color');
+  } else if (String(X_pattern) === '1,4,7') {
+    document.getElementById('1').style.removeProperty('background-color');
+    document.getElementById('4').style.removeProperty('background-color');
+    document.getElementById('7').style.removeProperty('background-color');
+  } else if (String(X_pattern) === '2,5,8') {
+    document.getElementById('2').style.removeProperty('background-color');
+    document.getElementById('5').style.removeProperty('background-color');
+    document.getElementById('8').style.removeProperty('background-color');
+  } else if (String(X_pattern) === '0,4,8') {
+    document.getElementById('0').style.removeProperty('background-color');
+    document.getElementById('4').style.removeProperty('background-color');
+    document.getElementById('8').style.removeProperty('background-color');
+  } else if (String(X_pattern) === '2,4,6') {
+    document.getElementById('2').style.removeProperty('background-color');
+    document.getElementById('4').style.removeProperty('background-color');
+    document.getElementById('6').style.removeProperty('background-color');
+  } else if (String(X_pattern) === '1,4,6,7') {
+    document.getElementById('1').style.removeProperty('background-color');
+    document.getElementById('4').style.removeProperty('background-color');
+    document.getElementById('7').style.removeProperty('background-color');
+  }
+}
+
+function removeOBackgroundColor() {
+  if (String(O_pattern) === '0,1,2') {
+    document.getElementById('0').style.removeProperty('background-color');
+    document.getElementById('1').style.removeProperty('background-color');
+    document.getElementById('2').style.removeProperty('background-color');
+  } else if (String(O_pattern) === '3,4,5') {
+    document.getElementById('3').style.removeProperty('background-color');
+    document.getElementById('4').style.removeProperty('background-color');
+    document.getElementById('5').style.removeProperty('background-color');
+  } else if (String(O_pattern) === '6,7,8') {
+    document.getElementById('6').style.removeProperty('background-color');
+    document.getElementById('7').style.removeProperty('background-color');
+    document.getElementById('8').style.removeProperty('background-color');
+  } else if (String(O_pattern) === '0,3,6') {
+    document.getElementById('0').style.removeProperty('background-color');
+    document.getElementById('3').style.removeProperty('background-color');
+    document.getElementById('6').style.removeProperty('background-color');
+  } else if (String(O_pattern) === '1,4,7') {
+    document.getElementById('1').style.removeProperty('background-color');
+    document.getElementById('4').style.removeProperty('background-color');
+    document.getElementById('7').style.removeProperty('background-color');
+  } else if (String(O_pattern) === '2,5,8') {
+    document.getElementById('2').style.removeProperty('background-color');
+    document.getElementById('5').style.removeProperty('background-color');
+    document.getElementById('8').style.removeProperty('background-color');
+  } else if (String(O_pattern) === '0,4,8') {
+    document.getElementById('0').style.removeProperty('background-color');
+    document.getElementById('4').style.removeProperty('background-color');
+    document.getElementById('8').style.removeProperty('background-color');
+  } else if (String(O_pattern) === '2,4,6') {
+    document.getElementById('2').style.removeProperty('background-color');
+    document.getElementById('4').style.removeProperty('background-color');
+    document.getElementById('6').style.removeProperty('background-color');
+  } else if (String(O_pattern) === '1,4,6,7') {
+    document.getElementById('1').style.removeProperty('background-color');
+    document.getElementById('4').style.removeProperty('background-color');
+    document.getElementById('7').style.removeProperty('background-color');
+  }
+
 }
