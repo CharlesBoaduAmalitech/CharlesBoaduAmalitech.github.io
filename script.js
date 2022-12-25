@@ -280,13 +280,11 @@ const drawScore = document.getElementById("draw");
 const Oscore = document.getElementById("Oscore");
 
 function results() {
-  console.log(X_pattern);
-  console.log(O_pattern);
   setTimeout(function () {
     modal.style.display = "initial";
     endGame.style.display = "flex";
     restartingGame.style.display = "none";
-  }, 2000);
+  }, 1500);
   
 
   if (turn.getAttribute("data-value") === "O") {
@@ -295,12 +293,10 @@ function results() {
     if (playerBtn.getAttribute("data-value") === "active") {
       if (XradioBtn.checked === true) {
         changeXBackground();
-        console.log('Here I am 1')
         winnerName.innerHTML = "Player 1 wins!";
       }
       if (OradioBtn.checked === true) {
         changeXBackground();
-        console.log('Here I am 2');
         winnerName.innerHTML = "Player 1 wins!";
       }
     }
@@ -311,8 +307,6 @@ function results() {
       }
       if (OradioBtn.checked === true) {
         changeXBackground();
-        console.log(O_pattern);
-        console.log('1');
         winnerName.innerHTML = "Oh no, you lost...";
       }
     }
@@ -330,12 +324,10 @@ function results() {
     if (playerBtn.getAttribute("data-value") === "active") {
       if (OradioBtn.checked === true) {
         changeOBackground();
-        console.log('Here I am 3')
         winnerName.innerHTML = "Player 2 wins!";
       }
       if (XradioBtn.checked === true) {
         changeOBackground();
-        console.log('Here I am 4');
         winnerName.innerHTML = "Player 2 wins!";
       }
     }
@@ -392,6 +384,7 @@ function nextRound() {
     all.setAttribute("data-value", "");
     all.classList.add("hoverClassX");
   }
+
   turn.setAttribute("data-value", "X");
   turn.src = "./assets/icon-x-turn.svg";
   box0.setAttribute("onclick", "hitBox('0')");
@@ -406,7 +399,6 @@ function nextRound() {
   X_pattern = [];
   O_pattern = [];
   origBoard = Array.from(Array(9).keys());
-  cpuTurn();
 }
 
 function displayModalRestart() {
@@ -500,13 +492,13 @@ function changeXBackground() {
     img[1].src = './assets/icon-x-1.png';
     img[2].src = './assets/icon-x-1.png';
   } else if (String(X_pattern) === '3,4,5') {
-    box4.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
     box3.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
+    box4.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
     box5.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
     img = document.getElementsByClassName('boxPlayed');
-    img[0].src = './assets/icon-x-1.png';
-    img[1].src = './assets/icon-x-1.png';
     img[2].src = './assets/icon-x-1.png';
+    img[3].src = './assets/icon-x-1.png';
+    img[4].src = './assets/icon-x-1.png';
   } else if (String(X_pattern) === '6,7,8') {
     box6.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
     box7.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
@@ -521,8 +513,8 @@ function changeXBackground() {
     box6.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
     img = document.getElementsByClassName('boxPlayed');
     img[0].src = './assets/icon-x-1.png';
-    img[2].src = './assets/icon-x-1.png';
-    img[4].src = './assets/icon-x-1.png';
+    img[1].src = './assets/icon-x-1.png';
+    img[3].src = './assets/icon-x-1.png';
   } else if (String(X_pattern) === '1,4,7') {
     box1.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
     box4.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
