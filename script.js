@@ -5,6 +5,7 @@ let O_pattern = [];
 const winnerMark = document.getElementById("winner-mark");
 let turn = document.getElementById("turn");
 let allBox = document.getElementsByClassName("box");
+let img = document.getElementsByClassName('boxPlayed');
 const player1Name = document.getElementById("player1Name");
 const player2Name = document.getElementById("player2Name");
 const cpuBtn = document.getElementById("cpuBtn");
@@ -202,7 +203,7 @@ async function cpuTurn() {
     });
     await promise;
     setTimeout(cpuPlay, 2000);
-    cpuThink();
+    //cpuThink();
   }
 
   if (OradioBtn.checked === true) {
@@ -225,7 +226,7 @@ async function cpuTurn() {
     });
     await promise;
     setTimeout(cpuPlay, 2000);
-    cpuThink();
+    //cpuThink();
   }
 }
 
@@ -241,11 +242,6 @@ function printLetterByLetter(destination, message, speed) {
   document.getElementById(destination).innerHTML = "";
 }
 
-function cpuThink() {
-  cpuThinkMessage.style.display = "initial";
-  printLetterByLetter("cpuThinkMessage", "CPU think...", 150);
-}
-
 function bestSpot() {
   return minimax(origBoard, aiPlayer).index;
 }
@@ -256,6 +252,7 @@ function cpuPlay() {
 
   // console.log(origBoard);
   // console.log(minimax(origBoard, aiPlayer).index);
+
 
   box0.setAttribute("onclick", "hitBox('0')");
   box1.setAttribute("onclick", "hitBox('1')");
@@ -399,6 +396,7 @@ function nextRound() {
   X_pattern = [];
   O_pattern = [];
   origBoard = Array.from(Array(9).keys());
+  cpuTurn();
 }
 
 function displayModalRestart() {
@@ -487,7 +485,6 @@ function changeXBackground() {
     box0.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
     box1.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
     box2.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
-    let img = document.getElementsByClassName('boxPlayed');
     img[0].src = './assets/icon-x-1.png';
     img[1].src = './assets/icon-x-1.png';
     img[2].src = './assets/icon-x-1.png';
@@ -495,7 +492,6 @@ function changeXBackground() {
     box3.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
     box4.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
     box5.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
-    img = document.getElementsByClassName('boxPlayed');
     img[2].src = './assets/icon-x-1.png';
     img[3].src = './assets/icon-x-1.png';
     img[4].src = './assets/icon-x-1.png';
@@ -503,7 +499,6 @@ function changeXBackground() {
     box6.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
     box7.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
     box8.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
-    img = document.getElementsByClassName('boxPlayed');
     img[2].src = './assets/icon-x-1.png';
     img[3].src = './assets/icon-x-1.png';
     img[4].src = './assets/icon-x-1.png';
@@ -511,7 +506,6 @@ function changeXBackground() {
     box0.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
     box3.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
     box6.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
-    img = document.getElementsByClassName('boxPlayed');
     img[0].src = './assets/icon-x-1.png';
     img[1].src = './assets/icon-x-1.png';
     img[3].src = './assets/icon-x-1.png';
@@ -519,7 +513,6 @@ function changeXBackground() {
     box1.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
     box4.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
     box7.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
-    img = document.getElementsByClassName('boxPlayed');
     img[0].src = './assets/icon-x-1.png';
     img[2].src = './assets/icon-x-1.png';
     img[4].src = './assets/icon-x-1.png';
@@ -527,7 +520,6 @@ function changeXBackground() {
     box2.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
     box5.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
     box8.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
-    img = document.getElementsByClassName('boxPlayed');
     img[0].src = './assets/icon-x-1.png';
     img[2].src = './assets/icon-x-1.png';
     img[4].src = './assets/icon-x-1.png';
@@ -535,8 +527,6 @@ function changeXBackground() {
     box0.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
     box4.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
     box8.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
-    img = document.getElementsByClassName('boxPlayed');
-    console.log(img);
     img[0].src = './assets/icon-x-1.png';
     img[2].src = './assets/icon-x-1.png';
     img[4].src = './assets/icon-x-1.png';
@@ -544,15 +534,13 @@ function changeXBackground() {
     box2.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
     box4.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
     box6.style.backgroundColor = 'hsl(var(--clr-lightBlue))';
-    img = document.getElementsByClassName('boxPlayed');
-    img[1].src = './assets/icon-x-1.png';
+    img[0].src = './assets/icon-x-1.png';
     img[3].src = './assets/icon-x-1.png';
     img[4].src = './assets/icon-x-1.png';
   } else if (String(X_pattern) === '1,4,6,7') {
     box1.style.backgroundColor = '#F2B137';
     box4.style.backgroundColor = '#F2B137';
     box7.style.backgroundColor = '#F2B137';
-    let img = document.getElementsByClassName('boxPlayed');
     img[0].src = './assets/icon-o-1.png';
     img[1].src = './assets/icon-o-1.png';
     img[5].src = './assets/icon-o-1.png';
@@ -564,7 +552,6 @@ function changeOBackground() {
     box0.style.backgroundColor = '#F2B137';
     box1.style.backgroundColor = '#F2B137';
     box2.style.backgroundColor = '#F2B137';
-    let img = document.getElementsByClassName('boxPlayed');
     img[0].src = './assets/icon-o-1.png';
     img[1].src = './assets/icon-o-1.png';
     img[2].src = './assets/icon-o-1.png';
@@ -572,7 +559,6 @@ function changeOBackground() {
     box3.style.backgroundColor = '#F2B137';
     box4.style.backgroundColor = '#F2B137';
     box5.style.backgroundColor = '#F2B137';
-    let img = document.getElementsByClassName('boxPlayed');
     img[2].src = './assets/icon-o-1.png';
     img[3].src = './assets/icon-o-1.png';
     img[4].src = './assets/icon-o-1.png';
@@ -580,7 +566,6 @@ function changeOBackground() {
     box6.style.backgroundColor = '#F2B137';
     box7.style.backgroundColor = '#F2B137';
     box8.style.backgroundColor = '#F2B137';
-    let img = document.getElementsByClassName('boxPlayed');
     img[3].src = './assets/icon-o-1.png';
     img[4].src = './assets/icon-o-1.png';
     img[5].src = './assets/icon-o-1.png';
@@ -588,7 +573,6 @@ function changeOBackground() {
     box0.style.backgroundColor = '#F2B137';
     box3.style.backgroundColor = '#F2B137';
     box6.style.backgroundColor = '#F2B137';
-    let img = document.getElementsByClassName('boxPlayed');
     img[0].src = './assets/icon-o-1.png';
     img[1].src = './assets/icon-o-1.png';
     img[5].src = './assets/icon-o-1.png';
@@ -596,16 +580,14 @@ function changeOBackground() {
     box1.style.backgroundColor = '#F2B137';
     box4.style.backgroundColor = '#F2B137';
     box7.style.backgroundColor = '#F2B137';
-    let img = document.getElementsByClassName('boxPlayed');
     img[1].src = './assets/icon-o-1.png';
     img[3].src = './assets/icon-o-1.png';
     img[5].src = './assets/icon-o-1.png';
+    console.log(img);
   } else if (String(O_pattern) === '2,5,8') {
     box2.style.backgroundColor = '#F2B137';
     box5.style.backgroundColor = '#F2B137';
     box8.style.backgroundColor = '#F2B137';
-    let img = document.getElementsByClassName('boxPlayed');
-    console.log(img);
     img[1].src = './assets/icon-o-1.png';
     img[4].src = './assets/icon-o-1.png';
     img[5].src = './assets/icon-o-1.png';
@@ -613,7 +595,6 @@ function changeOBackground() {
     box0.style.backgroundColor = '#F2B137';
     box4.style.backgroundColor = '#F2B137';
     box8.style.backgroundColor = '#F2B137';
-    let img = document.getElementsByClassName('boxPlayed');
     img[0].src = './assets/icon-o-1.png';
     img[3].src = './assets/icon-o-1.png';
     img[5].src = './assets/icon-o-1.png';
@@ -621,99 +602,95 @@ function changeOBackground() {
     box2.style.backgroundColor = '#F2B137';
     box4.style.backgroundColor = '#F2B137';
     box6.style.backgroundColor = '#F2B137';
-    let img = document.getElementsByClassName('boxPlayed');
-    console.log(img);
     img[2].src = './assets/icon-o-1.png';
     img[4].src = './assets/icon-o-1.png';
     img[5].src = './assets/icon-o-1.png';
-} else if (String(O_pattern) === '1,4,6,7') {
+  } else if (String(O_pattern) === '1,4,6,7') {
     box1.style.backgroundColor = '#F2B137';
     box4.style.backgroundColor = '#F2B137';
     box7.style.backgroundColor = '#F2B137';
-    let img = document.getElementsByClassName('boxPlayed');
     img[1].src = './assets/icon-o-1.png';
     img[4].src = './assets/icon-o-1.png';
     img[7].src = './assets/icon-o-1.png';
-}
+  }
 }
 
 function removeXBackgroundColor() {
   if (String(X_pattern) === '0,1,2') {
-    document.getElementById('0').style.removeProperty('background-color');
-    document.getElementById('1').style.removeProperty('background-color');
-    document.getElementById('2').style.removeProperty('background-color');
+    box0.style.removeProperty('background-color');
+    box1.style.removeProperty('background-color');
+    box2.style.removeProperty('background-color');
   } else if (String(X_pattern) === '3,4,5') {
-    document.getElementById('3').style.removeProperty('background-color');
-    document.getElementById('4').style.removeProperty('background-color');
-    document.getElementById('5').style.removeProperty('background-color');
+    box3.style.removeProperty('background-color');
+    box4.style.removeProperty('background-color');
+    box5.style.removeProperty('background-color');
   } else if (String(X_pattern) === '6,7,8') {
-    document.getElementById('6').style.removeProperty('background-color');
-    document.getElementById('7').style.removeProperty('background-color');
-    document.getElementById('8').style.removeProperty('background-color');
+    box6.style.removeProperty('background-color');
+    box7.style.removeProperty('background-color');
+    box8.style.removeProperty('background-color');
   } else if (String(X_pattern) === '0,3,6') {
-    document.getElementById('0').style.removeProperty('background-color');
-    document.getElementById('3').style.removeProperty('background-color');
-    document.getElementById('6').style.removeProperty('background-color');
+    box0.style.removeProperty('background-color');
+    box3.style.removeProperty('background-color');
+    box6.style.removeProperty('background-color');
   } else if (String(X_pattern) === '1,4,7') {
-    document.getElementById('1').style.removeProperty('background-color');
-    document.getElementById('4').style.removeProperty('background-color');
-    document.getElementById('7').style.removeProperty('background-color');
+    box1.style.removeProperty('background-color');
+    box4.style.removeProperty('background-color');
+    box7.style.removeProperty('background-color');
   } else if (String(X_pattern) === '2,5,8') {
-    document.getElementById('2').style.removeProperty('background-color');
-    document.getElementById('5').style.removeProperty('background-color');
-    document.getElementById('8').style.removeProperty('background-color');
+    box2.style.removeProperty('background-color');
+    box5.style.removeProperty('background-color');
+    box8.style.removeProperty('background-color');
   } else if (String(X_pattern) === '0,4,8') {
-    document.getElementById('0').style.removeProperty('background-color');
-    document.getElementById('4').style.removeProperty('background-color');
-    document.getElementById('8').style.removeProperty('background-color');
+    box0.style.removeProperty('background-color');
+    box4.style.removeProperty('background-color');
+    box8.style.removeProperty('background-color');
   } else if (String(X_pattern) === '2,4,6') {
-    document.getElementById('2').style.removeProperty('background-color');
-    document.getElementById('4').style.removeProperty('background-color');
-    document.getElementById('6').style.removeProperty('background-color');
+    box2.style.removeProperty('background-color');
+    box4.style.removeProperty('background-color');
+    box6.style.removeProperty('background-color');
   } else if (String(X_pattern) === '1,4,6,7') {
-    document.getElementById('1').style.removeProperty('background-color');
-    document.getElementById('4').style.removeProperty('background-color');
-    document.getElementById('7').style.removeProperty('background-color');
+    box1.style.removeProperty('background-color');
+    box4.style.removeProperty('background-color');
+    box7.style.removeProperty('background-color');
   }
 }
 
 function removeOBackgroundColor() {
   if (String(O_pattern) === '0,1,2') {
-    document.getElementById('0').style.removeProperty('background-color');
-    document.getElementById('1').style.removeProperty('background-color');
-    document.getElementById('2').style.removeProperty('background-color');
+    box0.style.removeProperty('background-color');
+    box1.style.removeProperty('background-color');
+    box2.style.removeProperty('background-color');
   } else if (String(O_pattern) === '3,4,5') {
-    document.getElementById('3').style.removeProperty('background-color');
-    document.getElementById('4').style.removeProperty('background-color');
-    document.getElementById('5').style.removeProperty('background-color');
+    box3.style.removeProperty('background-color');
+    box4.style.removeProperty('background-color');
+    box5.style.removeProperty('background-color');
   } else if (String(O_pattern) === '6,7,8') {
-    document.getElementById('6').style.removeProperty('background-color');
-    document.getElementById('7').style.removeProperty('background-color');
-    document.getElementById('8').style.removeProperty('background-color');
+    box6.style.removeProperty('background-color');
+    box7.style.removeProperty('background-color');
+    box8.style.removeProperty('background-color');
   } else if (String(O_pattern) === '0,3,6') {
-    document.getElementById('0').style.removeProperty('background-color');
-    document.getElementById('3').style.removeProperty('background-color');
-    document.getElementById('6').style.removeProperty('background-color');
+    box0.style.removeProperty('background-color');
+    box3.style.removeProperty('background-color');
+    box6.style.removeProperty('background-color');
   } else if (String(O_pattern) === '1,4,7') {
-    document.getElementById('1').style.removeProperty('background-color');
-    document.getElementById('4').style.removeProperty('background-color');
-    document.getElementById('7').style.removeProperty('background-color');
+    box1.style.removeProperty('background-color');
+    box4.style.removeProperty('background-color');
+    box7.style.removeProperty('background-color');
   } else if (String(O_pattern) === '2,5,8') {
-    document.getElementById('2').style.removeProperty('background-color');
-    document.getElementById('5').style.removeProperty('background-color');
-    document.getElementById('8').style.removeProperty('background-color');
+    box2.style.removeProperty('background-color');
+    box5.style.removeProperty('background-color');
+    box8.style.removeProperty('background-color');
   } else if (String(O_pattern) === '0,4,8') {
-    document.getElementById('0').style.removeProperty('background-color');
-    document.getElementById('4').style.removeProperty('background-color');
-    document.getElementById('8').style.removeProperty('background-color');
+    box0.style.removeProperty('background-color');
+    box4.style.removeProperty('background-color');
+    box8.style.removeProperty('background-color');
   } else if (String(O_pattern) === '2,4,6') {
-    document.getElementById('2').style.removeProperty('background-color');
-    document.getElementById('4').style.removeProperty('background-color');
-    document.getElementById('6').style.removeProperty('background-color');
+    box2.style.removeProperty('background-color');
+    box4.style.removeProperty('background-color');
+    box6.style.removeProperty('background-color');
   } else if (String(O_pattern) === '1,4,6,7') {
-    document.getElementById('1').style.removeProperty('background-color');
-    document.getElementById('4').style.removeProperty('background-color');
-    document.getElementById('7').style.removeProperty('background-color');
+    box1.style.removeProperty('background-color');
+    box4.style.removeProperty('background-color');
+    box7.style.removeProperty('background-color');
   }
-
 }
